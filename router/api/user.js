@@ -35,7 +35,7 @@ router.post(
           .status(400)
           .json({ error: [{ msg: 'Email is Already in use' }] });
       }
-      let user = await User.findOne({ userName });
+      user = await User.findOne({ userName });
       if (user) {
         return res.status(400).json({ error: [{ msg: 'User Name is Taken' }] });
       }
