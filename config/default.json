@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://WelNewUser:admingoogle123456@cluster0.8zkia.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://WelNewUser:admingoogle123456@cluster0.8zkia.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret": "THIS MY SECRET CODE"
 }
