@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const config = require('config');
 const bycrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
+const config = require('config');
+const jwtSecret = config.get('jwtSecret');
 
 const User = require('../../models/User');
 
 // @router      POST /api/user
-// @description Register a User
+// @description Register a User (SignUp)
 // @access      Public
 router.post(
   '/',
@@ -59,17 +60,12 @@ router.post(
         },
       };
       // jwt Sign
-      jwt.sign(
-        paylode,
-        config.get('jwtSecret'),
-        { expiresIn: 3600 },
-        (error, token) => {
-          if (error) {
-            throw error;
-          }
-          res.json(token);
+      jwt.sign(paylode, jwtSecret, { expiresIn: 36000 }, (error, token) => {
+        if (error) {
+          throw error;
         }
-      );
+        res.json(token);
+      });
     } catch (error) {
       console.log(error.message);
       res.status(500).send('Server Error');

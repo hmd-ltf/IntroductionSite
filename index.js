@@ -12,6 +12,9 @@ app.use('/', (req, res) => {
   res.send('Working');
 });
 
+app.use('/api/user', require('./router/api/user'));
+app.use('/api/auth', require('./router/api/auth'));
+
 // Port Variable
 const PORT = process.env.PORT || 8001;
 
