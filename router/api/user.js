@@ -53,6 +53,13 @@ router.post(
       // Save the user in Database
       await user.save();
 
+      // Create the Profile of User
+      const profile = new Profile({
+        user: user.id,
+      });
+
+      await profile.save();
+
       // login Token Prepration
       const paylode = {
         user: {

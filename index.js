@@ -16,6 +16,7 @@ ConnectDB();
 // Defined Routes
 app.use('/api/user', require('./router/api/user'));
 app.use('/api/auth', require('./router/api/auth'));
+app.use('/api/profile', require('./router/api/profile'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
