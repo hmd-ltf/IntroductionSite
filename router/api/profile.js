@@ -44,6 +44,22 @@ router.get('/:id', checkObjectId('id'), async (req, res) => {
   }
 });
 
+// @route   GET api/profile/me
+// @desc    GET the profile of one user who is logged in
+// @access  Private
+router.get('/me', auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    if (!profile) {
+      return res.status(400).json({ msg: 'There is no profile for this user' });
+    }
+    res.json(profile);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // @route   POST api/profile
 // @desc    Update the profile of one user
 // @access  Private

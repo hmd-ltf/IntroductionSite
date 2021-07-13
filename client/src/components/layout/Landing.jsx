@@ -1,11 +1,31 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const Landing = () => {
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
+
+
+const Landing = ({ isAuthenticated , user }) => {
+
+    
+    if(isAuthenticated & user!==null){
+        return <Redirect to={user.userName} />
+    }
     return (
         <div>
-            Hello And Welcome
+          Hello and Welcome
         </div>
     )
 }
 
-export default Landing
+Landing.propTypes = {
+    isAuthenticated: PropTypes.bool,
+}
+
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user,
+}) 
+
+export default connect(mapStateToProps)(Landing)
+

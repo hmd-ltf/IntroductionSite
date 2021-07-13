@@ -11,3 +11,7 @@ export const LOG_OUT = 'LOG_OUT';
 
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
+
+export const PROFILE_LOADED = 'LOAD_PROFILE';
+export const PROFILE_UPDATED = 'PROFILE_UPDATED';
+export const PROFILE_ERROR = 'PROFILE_ERROR ';
