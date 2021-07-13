@@ -14,9 +14,9 @@ import { LOGIN_LINK, SIGNUP_LINK } from './components/routes/NavLinks';
 import Navmenu from './components/layout/Navmenu';
 import Landing from './components/layout/Landing';
 import Alert from './components/layout/Alert';
-
 import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
+import Profile from './components/profile/Profile';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -37,6 +37,7 @@ const App = () => {
             <Route exact path="/" component={Landing} />
             <Route exact path={SIGNUP_LINK} component={SignUp} />
             <Route exact path={LOGIN_LINK} component={Login} />
+            <Route exact path="/:userName" component={Profile} />
           </Switch>
         </Router>
       </Provider>

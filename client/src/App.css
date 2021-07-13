@@ -18,3 +18,12 @@
 .additionalText p {
   color: rgba(53, 52, 52, 0.719);
 }
+
+.loading {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

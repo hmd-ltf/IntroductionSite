@@ -6,6 +6,7 @@ const checkObjectId = require('../../middleware/checkObjectId');
 const { check, validationResult } = require('express-validator');
 
 const Profile = require('../../models/Profile');
+const User = require('../../models/User');
 
 // @route   GET api/profile
 // @desc    GET the profile of all users
@@ -20,23 +21,16 @@ router.get('/', async (req, res) => {
   }
 });
 
-// @route   GET api/profile/:id
-// @desc    GET the profile of one user by profile id
-// @access  Public
-router.get('/:id', checkObjectId('id'), async (req, res) => {
+// @route   GET api/profile/me
+// @desc    GET the profile of one user who is logged in
+// @access  Private
+router.get('/me', auth, async (req, res) => {
   try {
-    const profile = await Profile.findById(req.params.id);
-
+    console.log(req.user);
+    const profile = await Profile.findOne({ user: req.user.id });
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' });
     }
-
-    if (profile.id != req.user.id) {
-      // When Someone else visits profile
-      profile.totalVisits = profile.totalVisits + 1;
-    }
-    await profile.save();
-
     res.json(profile);
   } catch (error) {
     console.log(error.message);
@@ -44,15 +38,30 @@ router.get('/:id', checkObjectId('id'), async (req, res) => {
   }
 });
 
-// @route   GET api/profile/me
-// @desc    GET the profile of one user who is logged in
-// @access  Private
-router.get('/me', auth, async (req, res) => {
+// @route   GET api/profile/:userName
+// @desc    GET the profile of one user by user name
+// @access  Public
+router.get('/:userName', async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id });
+    const user = await User.findOne({ userName: req.params.userName }).select(
+      '-password'
+    );
+
+    if (!user) {
+      return res.status(400).json({ msg: 'There is no user' });
+    }
+
+    const profile = await Profile.findOne({ user: user._id });
+
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' });
     }
+
+    // When Someone else visits profile
+    profile.totalVisits = profile.totalVisits + 1;
+
+    await profile.save();
+
     res.json(profile);
   } catch (error) {
     console.log(error.message);

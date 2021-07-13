@@ -8,7 +8,7 @@ import { Redirect } from 'react-router'
 const Landing = ({ isAuthenticated , user }) => {
 
     
-    if(isAuthenticated & user!==null){
+    if(isAuthenticated & user!=null){
         return <Redirect to={user.userName} />
     }
     return (

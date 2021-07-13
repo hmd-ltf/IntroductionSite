@@ -22,8 +22,8 @@ const profile = (state = initialState, action) => {
       };
     case PROFILE_ERROR:
       return {
+        ...state,
         isLoading: true,
-        profile: null,
       };
     default:
       return {
