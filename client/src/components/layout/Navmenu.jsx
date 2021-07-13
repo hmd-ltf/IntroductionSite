@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import {Container , Navbar , Nav} from 'react-bootstrap'
-import {LOGIN_LINK , SIGNUP_LINK} from '../routes/NavLinks'
+import {LOGIN_LINK , SIGNUP_LINK , SETTING_LINK} from '../routes/NavLinks'
 
 import { PropTypes } from 'prop-types'
 import { connect } from "react-redux";
@@ -23,6 +23,7 @@ const Navmenu = ({isAuthenticated  , logOut}) => {
     const authMenu = (
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className='endNav'>
+                <Nav.Link href={SETTING_LINK}>Settings</Nav.Link>
                 <Nav.Link onClick={logOut}>
                     Log Out
                 </Nav.Link>
@@ -50,7 +51,7 @@ const Navmenu = ({isAuthenticated  , logOut}) => {
 Navmenu.prototype = {
     logOut: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-  }
+}
   
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated

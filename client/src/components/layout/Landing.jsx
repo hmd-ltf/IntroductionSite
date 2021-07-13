@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 
 
-const Landing = ({ isAuthenticated , user }) => {
+const Landing = ({ isAuthenticated , isLoading , user }) => {
 
     
-    if(isAuthenticated & user!=null){
+    if(isAuthenticated & !isLoading & user !== null){
         return <Redirect to={user.userName} />
     }
     return (
@@ -20,11 +20,13 @@ const Landing = ({ isAuthenticated , user }) => {
 
 Landing.propTypes = {
     isAuthenticated: PropTypes.bool,
+    isLoading: PropTypes.bool,
 }
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
     user: state.auth.user,
+    isLoading: state.auth.isLoading,
 }) 
 
 export default connect(mapStateToProps)(Landing)

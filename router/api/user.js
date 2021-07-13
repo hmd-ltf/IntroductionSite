@@ -6,7 +6,10 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const jwtSecret = config.get('jwtSecret');
 
+const auth = require('../../middleware/auth');
+
 const User = require('../../models/User');
+const Profile = require('../../models/Profile');
 
 // @router      POST /api/user
 // @description Register a User (SignUp)
@@ -79,5 +82,23 @@ router.post(
     }
   }
 );
+
+// @router      DELETE /api/user
+// @description Delete a User
+// @access      Private
+router.delete('/', auth, async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.user.id);
+    if (!user) {
+      return res.status(400).json({ error: [{ msg: 'User Does not exist' }] });
+    }
+    await Profile.findByIdAndDelete(user._id);
+
+    res.json(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

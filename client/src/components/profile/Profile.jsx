@@ -24,7 +24,9 @@ const Profile = ({loadProfile , profile , isLoading}) => {
 
     return (
         <Fragment>
-            {profile.totalVisits}
+            <h1>{profile.totalVisits}</h1>
+            <h3>{profile.name}</h3>
+            <p>{profile.totalVisits}</p>
         </Fragment>
     )
 }

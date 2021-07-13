@@ -10,6 +10,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOG_OUT,
+  DELETE_USER,
 } from './types';
 
 // Load User
@@ -84,8 +85,36 @@ export const signUp = (email, userName, password) => async (dispatch) => {
 };
 
 // LogOut
-export const logOut = () => (dispatch) => {
-  dispatch({
-    type: LOG_OUT,
-  });
+export const logOut = () => async (dispatch) => {
+  try {
+    await axios.post('/api/profile/lastactive');
+    dispatch({
+      type: LOG_OUT,
+    });
+  } catch (error) {
+    dispatch({
+      type: LOG_OUT,
+    });
+  }
+};
+
+// Delete User
+export const deleteUser = () => async (dispatch) => {
+  try {
+    await axios.delete('/api/user');
+    dispatch({
+      type: DELETE_USER,
+    });
+    dispatch(setAlert('User Deleted Success', 'danger'));
+  } catch (err) {
+    const errors = err.response.data.error;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({
+      type: REGISTER_FAILURE,
+    });
+  }
 };
