@@ -2,11 +2,13 @@ import React , { Fragment, useEffect } from 'react'
 import { useParams } from 'react-router';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import {Container} from 'react-bootstrap'
 
 import LoadingSpinner from '../layout/LoadingSpinner'
 
 import {loadProfile} from '../../actions/profile'
-
+import MainDetails from './MainDetails'
+import Contact from './Contact'
 
 const Profile = ({loadProfile , profile , isLoading}) => {
 
@@ -14,7 +16,7 @@ const Profile = ({loadProfile , profile , isLoading}) => {
 
     useEffect(() => {
         loadProfile(userName)
-    } , [userName])
+    } , [userName , loadProfile])
 
     if(isLoading){
         return (
@@ -24,9 +26,11 @@ const Profile = ({loadProfile , profile , isLoading}) => {
 
     return (
         <Fragment>
-            <h1>{profile.totalVisits}</h1>
-            <h3>{profile.name}</h3>
-            <p>{profile.totalVisits}</p>
+            <Container className='form'>
+                <MainDetails />
+                
+            </Container>
+            <Contact />
         </Fragment>
     )
 }

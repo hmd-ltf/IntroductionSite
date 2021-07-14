@@ -6,7 +6,7 @@ const profileSchema = new mongoose.Schema({
     ref: 'user',
   },
   profilePic: {
-    type: String,
+    data: String,
   },
   name: {
     type: String,

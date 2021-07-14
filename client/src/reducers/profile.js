@@ -22,7 +22,7 @@ const profile = (state = initialState, action) => {
       };
     case PROFILE_ERROR:
       return {
-        ...state,
+        profile: null,
         isLoading: true,
       };
     default:

@@ -21,7 +21,7 @@ import Alert from './components/layout/Alert';
 import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
 import Profile from './components/profile/Profile';
-import Setting from './components/profile/Settings';
+import Setting from './components/settings/Settings';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);

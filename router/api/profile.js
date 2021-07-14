@@ -26,7 +26,6 @@ router.get('/', async (req, res) => {
 // @access  Private
 router.get('/me', auth, async (req, res) => {
   try {
-    console.log(req.user);
     const profile = await Profile.findOne({ user: req.user.id });
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' });
@@ -209,7 +208,7 @@ router.delete(
 // @desc    POST a message for user
 // @access  Public
 router.post(
-  '/message/id',
+  '/message/:id',
   [
     checkObjectId('id'),
     check('name', 'Name is Required').not().isEmpty(),
