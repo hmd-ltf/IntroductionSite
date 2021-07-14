@@ -1,4 +1,4 @@
-import React , { Fragment, useEffect } from 'react'
+import React , { Fragment, useEffect , useState } from 'react'
 import { useParams } from 'react-router';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -14,20 +14,22 @@ const Profile = ({ isLoading , isAuthenticated , authLoading , loadMe ,loadProfi
 
     const {userName} = useParams();
 
+    const [isSame, setSame] = useState();
+
     useEffect(() => {
         if(!authLoading){
             if(isAuthenticated){
                 if(user.userName === userName){
-                    console.log('hello')
-                    loadMe()
+                    setSame(true);
+                    loadMe();
                 }
                 else{
-                    console.log('not hello')
+                    setSame(false);
                     loadProfile(userName);
                 }
             }
             else{
-                console.log('hello no')
+                setSame(false);
                 loadProfile(userName);
             }
         }
@@ -43,9 +45,11 @@ const Profile = ({ isLoading , isAuthenticated , authLoading , loadMe ,loadProfi
         <Fragment>
             <Container className='form'>
                 <MainDetails />
-                
             </Container>
-            <Contact />
+            {
+                isSame ? <div /> : <Contact />
+            }
+            
         </Fragment>
     )
 }

@@ -13,6 +13,7 @@ import {
   LOGIN_LINK,
   SIGNUP_LINK,
   SETTING_LINK,
+  MESSAGE_LINK,
 } from './components/routes/NavLinks';
 
 import Navmenu from './components/layout/Navmenu';
@@ -22,6 +23,7 @@ import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
 import Profile from './components/profile/Profile';
 import Setting from './components/settings/Settings';
+import Messages from './components/profile/Messages';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -43,6 +45,7 @@ const App = () => {
             <Route exact path={SIGNUP_LINK} component={SignUp} />
             <Route exact path={LOGIN_LINK} component={Login} />
             <Route exact path={SETTING_LINK} component={Setting} />
+            <Route exact path={MESSAGE_LINK} component={Messages} />
             <Route exact path="/:userName" component={Profile} />
           </Switch>
         </Router>

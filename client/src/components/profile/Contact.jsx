@@ -17,7 +17,6 @@ const Contact = ({profile , postMessage}) => {
             <h3>Send A Message</h3>
             <Form onSubmit={(e) => {
                     e.preventDefault();
-                    console.log(message);
                     postMessage(profile._id ,name, email , message);
                 }}>
                 <Row>
