@@ -30,7 +30,8 @@ const EducationForm = (props) => {
                     <Form.Label>From</Form.Label>
                     <Form.Control 
                         type="date" 
-                        max ={Date.now()}
+                        min='1950-01-01'
+                        max ={new Date().toJSON().split('T')[0]}
                         value={from} 
                         onChange={(e) => setFrom(e.target.value)}
                     />
@@ -41,7 +42,7 @@ const EducationForm = (props) => {
                     <Form.Control 
                         type="date" 
                         min={from}
-                        max={Date.now()}
+                        max={new Date().toJSON().split('T')[0]}
                         value={to} 
                         onChange={(e) => setTo(e.target.value)}
                     />
