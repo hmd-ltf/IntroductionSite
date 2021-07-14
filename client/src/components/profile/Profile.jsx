@@ -6,17 +6,32 @@ import {Container} from 'react-bootstrap'
 
 import LoadingSpinner from '../layout/LoadingSpinner'
 
-import {loadProfile} from '../../actions/profile'
+import {loadMe, loadProfile} from '../../actions/profile'
 import MainDetails from './MainDetails'
 import Contact from './Contact'
 
-const Profile = ({loadProfile , profile , isLoading}) => {
+const Profile = ({ isLoading , isAuthenticated , authLoading , loadMe ,loadProfile , user}) => {
 
     const {userName} = useParams();
 
     useEffect(() => {
-        loadProfile(userName)
-    } , [userName , loadProfile])
+        if(!authLoading){
+            if(isAuthenticated){
+                if(user.userName === userName){
+                    console.log('hello')
+                    loadMe()
+                }
+                else{
+                    console.log('not hello')
+                    loadProfile(userName);
+                }
+            }
+            else{
+                console.log('hello no')
+                loadProfile(userName);
+            }
+        }
+    } , [userName ,user, loadProfile , isAuthenticated , loadMe , authLoading])
 
     if(isLoading){
         return (
@@ -36,14 +51,19 @@ const Profile = ({loadProfile , profile , isLoading}) => {
 }
 
 Profile.propTypes = {
-    profile: PropTypes.object.isRequired,
+    user: PropTypes.object,
+    loadMe: PropTypes.func,
     loadProfile: PropTypes.func.isRequired,
     isLoading: PropTypes.bool,
+    isAuthenticated: PropTypes.bool,
+    authLoading: PropTypes.bool,
 }
 const mapStateToProps = (state) => ({
-    profile: state.profile.profile,
-    isLoading: state.profile.isLoading
+    isLoading: state.profile.isLoading,
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user,
+    authLoading: state.auth.isLoading
 });
 
-export default connect(mapStateToProps , {loadProfile})(Profile);
+export default connect(mapStateToProps , {loadProfile , loadMe})(Profile);
 
