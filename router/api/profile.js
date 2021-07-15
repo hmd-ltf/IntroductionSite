@@ -39,6 +39,30 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
+// @route   GET api/profile/userName/:id
+// @desc    GET the userName of a user with Profile id
+// @access  Public
+router.get('/userName/:id', async (req, res) => {
+  try {
+    const profile = await Profile.findById(req.params.id);
+
+    if (!profile) {
+      return res.status(400).json({ msg: 'There is no profile for this user' });
+    }
+
+    const user = await User.findById(profile.user).select('-password');
+
+    if (!user) {
+      return res.status(400).json({ msg: 'There is no user' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // @route   GET api/profile/:userName
 // @desc    GET the profile of one user by user name
 // @access  Public

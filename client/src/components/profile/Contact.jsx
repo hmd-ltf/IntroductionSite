@@ -9,7 +9,7 @@ const Contact = ({profile , postMessage}) => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
 
     return (
       <Fragment>

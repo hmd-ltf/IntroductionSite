@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { PROFILE_LOADED, PROFILE_UPDATED, PROFILE_ERROR } from './types';
+import {
+  PROFILE_LOADED,
+  PROFILE_UPDATED,
+  PROFILE_ERROR,
+  ALL_PROFILES,
+  GET_USERNAME,
+} from './types';
 import { setAlert } from './alert';
 
 // Load Profile of current user
@@ -211,5 +217,32 @@ export const deleteMessage = (id) => async (dispatch) => {
     dispatch({
       type: PROFILE_ERROR,
     });
+  }
+};
+
+// Load All PRofiles
+export const loadAllProfiles = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/`);
+    dispatch({
+      type: ALL_PROFILES,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch(setAlert('Some Error Occured', 'danger'));
+  }
+};
+
+// Get User Name By Profile ID
+export const getUserName = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/userName/${id}`);
+    console.log(res.data);
+    dispatch({
+      type: GET_USERNAME,
+      payload: res.data.userName,
+    });
+  } catch (error) {
+    dispatch(setAlert('Some Error Occured', 'danger'));
   }
 };

@@ -16,3 +16,5 @@ export const REMOVE_ALERT = 'REMOVE_ALERT';
 export const PROFILE_LOADED = 'LOAD_PROFILE';
 export const PROFILE_UPDATED = 'PROFILE_UPDATED';
 export const PROFILE_ERROR = 'PROFILE_ERROR ';
+export const ALL_PROFILES = 'ALL_PROFILES';
+export const GET_USERNAME = 'GET_USERNAME';

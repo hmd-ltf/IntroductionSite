@@ -92,7 +92,7 @@ router.delete('/', auth, async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: [{ msg: 'User Does not exist' }] });
     }
-    await Profile.findByIdAndDelete(user._id);
+    await Profile.findOne({ user: user._id });
 
     res.json(user);
   } catch (error) {

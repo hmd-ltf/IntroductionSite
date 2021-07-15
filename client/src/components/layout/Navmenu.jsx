@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import {Container , Navbar , Nav} from 'react-bootstrap'
-import {LOGIN_LINK , SIGNUP_LINK , SETTING_LINK , MESSAGE_LINK} from '../routes/NavLinks'
+import {LOGIN_LINK , SIGNUP_LINK , SETTING_LINK , MESSAGE_LINK , FIND_USERS_LINK} from '../routes/NavLinks'
 
 import { PropTypes } from 'prop-types'
 import { connect } from "react-redux";
@@ -13,6 +13,9 @@ const Navmenu = ({isAuthenticated  , logOut}) => {
 
     const guestMenu = (
             <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav>
+                    <Nav.Link href={FIND_USERS_LINK}>Find</Nav.Link>
+                </Nav>
                 <Nav className='endNav'>
                     <Nav.Link href={LOGIN_LINK}>LogIn</Nav.Link>
                     <Nav.Link href={SIGNUP_LINK}>SignUp</Nav.Link>
@@ -23,6 +26,7 @@ const Navmenu = ({isAuthenticated  , logOut}) => {
     const authMenu = (
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
+                <Nav.Link href={FIND_USERS_LINK}>Find</Nav.Link>
                 <Nav.Link href={MESSAGE_LINK}>Messages</Nav.Link>
             </Nav>
             <Nav className='endNav'>
