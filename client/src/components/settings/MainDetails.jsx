@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { postDetails } from '../../actions/profile'
 import { connect } from 'react-redux'
 
-import { Container , Form , Row , Col , Button } from 'react-bootstrap'
+import { Container , Form , Row , Col , Button , Image} from 'react-bootstrap'
 
 const MainDetails = ({ postDetails , profile}) => {
 
@@ -47,10 +47,10 @@ const MainDetails = ({ postDetails , profile}) => {
 
                         <Col>
                             {profilePic && (
-                                <img
+                                <Image
                                 src={profilePic}
                                 alt="#"
-                                style={{ height: '100%', width:'100%' }}
+                                style={{ maxWidth: '24rem' }}
                             />
                             )} 
                         </Col>

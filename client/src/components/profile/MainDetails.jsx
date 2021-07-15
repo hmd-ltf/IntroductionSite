@@ -55,7 +55,7 @@ const MainDetails = ({profile}) => {
             <Container>
                 <Row className='mt-5'>
                     <Col>
-                        <img src={profile.profilePic} alt='#' style={{ height: '300px' }}/>
+                        <img src={profile.profilePic} alt='#' style={{ maxWidth: '24rem' }}/>
                     </Col>
                     <Col>
                         <h1>{profile.name}</h1>
