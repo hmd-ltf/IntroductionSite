@@ -13,7 +13,6 @@ const singleEducation = (edu) => {
             <h4>{edu.institution}</h4>
             <p className='ml-5'>{moment(edu.from).format('DD/MM/yyyy')}   -   
             {moment(edu.to).format('DD/MM/yyyy')}</p> 
-        
             <hr />
         </Fragment>
     )
@@ -49,12 +48,14 @@ const calCulateTime = (time) => {
 
 const MainDetails = ({profile}) => {
 
+    console.log(profile.profilePic)
+
     return (
         <Fragment>
             <Container>
                 <Row className='mt-5'>
                     <Col>
-                        <img src="" alt='' className='image-handel'/>
+                        <img src={profile.profilePic} alt='#' style={{ height: '300px' }}/>
                     </Col>
                     <Col>
                         <h1>{profile.name}</h1>

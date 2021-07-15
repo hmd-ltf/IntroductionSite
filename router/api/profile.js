@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { cloudinary } = require('../../config/cloudinary');
+
 const auth = require('../../middleware/auth');
 const checkObjectId = require('../../middleware/checkObjectId');
 const { check, validationResult } = require('express-validator');
@@ -80,7 +82,11 @@ router.post('/', auth, async (req, res) => {
       profile.name = name;
     }
     if (profilePic) {
-      profile.profilePic = profilePic;
+      const fileStr = profilePic;
+      const uploadRes = await cloudinary.uploader.upload(fileStr, {
+        upload_preset: 'intro_site',
+      });
+      profile.profilePic = uploadRes.url;
     }
     if (briefSummary) {
       profile.briefSummary = briefSummary;

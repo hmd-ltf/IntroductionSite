@@ -11,6 +11,24 @@ const MainDetails = ({ postDetails , profile}) => {
     const [profilePic , setProfilePic] = useState(profile.profilePic);
     const [briefSummary , setBriefSummary] = useState(profile.briefSummary);
 
+
+    // Image
+    const [fileInputState , setFileInputState] = useState('')
+    
+    const handleFileInputChange = (e) => {
+        const file = e.target.files[0]
+        previewFile(file);
+        setFileInputState(e.target.value);
+    }
+
+    const previewFile = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setProfilePic(reader.result);
+        }
+    }
+
     return (
         <Fragment>
             <Container className='mt-5 mb-5'>
@@ -20,7 +38,26 @@ const MainDetails = ({ postDetails , profile}) => {
                     e.preventDefault();
                     postDetails(name, profilePic , briefSummary);
                 }}>
+
                     <Row>
+                        <Col>
+                            <input type='file' name='image' onChange={handleFileInputChange} value={fileInputState}
+                            />
+                        </Col>
+
+                        <Col>
+                            {profilePic && (
+                                <img
+                                src={profilePic}
+                                alt="#"
+                                style={{ height: '100%', width:'100%' }}
+                            />
+                            )} 
+                        </Col>
+
+                    </Row>
+
+                    <Row className = 'mt-5'>
                         <Col>
                             <Form.Group size="lg" controlId="name">
                             <Form.Label>Name</Form.Label>
@@ -42,7 +79,7 @@ const MainDetails = ({ postDetails , profile}) => {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Button variant="primary" type='submit'>
+                    <Button block variant="primary" type='submit'>
                         Save
                     </Button>
                 </Form>
