@@ -32,7 +32,23 @@ const singleExperiance = (exp) => {
     )
 }
 
+const calCulateTime = (time) => {
+    const current = Date.now()
+   
+    let sec = Math.floor((current - Date.parse(time))/1000);
+    let min = Math.floor(sec/60);
+    sec = sec%60
+    let hours = Math.floor(min/60);
+    min = min%60
+    let days = Math.floor(hours/24);
+    hours = hours%24
+    console.log(days)
+    
+    return (`${days} Days , ${hours} Hours , ${min} Min`);
+}
+
 const MainDetails = ({profile}) => {
+
     return (
         <Fragment>
             <Container>
@@ -44,7 +60,7 @@ const MainDetails = ({profile}) => {
                         <h1>{profile.name}</h1>
                         <h4>{profile.briefSummary}</h4>
                         <h5>Profile Visits: {profile.totalVisits}</h5>
-                        <h6>Active {} ago</h6>
+                        <h6>Active {calCulateTime(profile.lastActiveTime)} ago</h6>
                     </Col>
                 </Row>
             </Container>
