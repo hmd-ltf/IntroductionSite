@@ -30,6 +30,8 @@ const Login = ({ logIn , isAuthenticated}) => {
       return (
         <Fragment>
           <Container className='form'>
+          <h1 className='mb-3'>Login</h1>
+
               <Form onSubmit={handleSubmit}>
                   <Form.Group size="lg" controlId="email">
                   <Form.Label>Email</Form.Label>

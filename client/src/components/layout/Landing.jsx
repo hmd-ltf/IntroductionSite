@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
+
+import {Container} from 'react-bootstrap'
+
+import Login from '../auth/Login'
 
 
 const Landing = ({ isAuthenticated , isLoading , user }) => {
@@ -12,9 +16,12 @@ const Landing = ({ isAuthenticated , isLoading , user }) => {
         return <Redirect to={user.userName} />
     }
     return (
-        <div>
-          Hello and Welcome
-        </div>
+        <Fragment>
+          <Container className='mt-4'>
+              <h1>Welcome To MY Site</h1>
+          </Container>
+          <Login />
+        </Fragment>
     )
 }
 

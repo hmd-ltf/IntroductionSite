@@ -53,7 +53,6 @@ export const postDetails =
       briefSummary: briefSummary,
     };
     try {
-      console.log(body);
       const res = await axios.post('/api/profile', body);
       dispatch({
         type: PROFILE_UPDATED,

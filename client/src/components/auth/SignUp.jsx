@@ -9,7 +9,7 @@ import { signUp } from '../../actions/auth'
 import { PropTypes } from "prop-types";
 import { Fragment } from 'react';
 
-import { LOGIN_LINK } from '../routes/NavLinks';
+import { LOGIN_LINK , SETTING_LINK } from '../routes/NavLinks';
 
 const SignUp = ({ setAlert , signUp , isAuthenticated}) => {
     const [email, setEmail] = useState('');
@@ -32,12 +32,13 @@ const SignUp = ({ setAlert , signUp , isAuthenticated}) => {
 
     //   if user successfully logged in then redirect
       if(isAuthenticated){
-        return <Redirect to='/' />
+        return <Redirect to={SETTING_LINK} />
       }
 
       return (
         <Fragment>
             <Container className='form'>
+            <h1 className='mb-3'>SignUp</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group size="lg" controlId="email">
                 <Form.Label>Email</Form.Label>
